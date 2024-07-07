@@ -15,21 +15,19 @@ describe('fillTank', () => {
     };
   });
 
-  it('should fill the tank with the full amount'
-    + 'if the amount is not given', () => {
+  it('should fills the tank completely when no amount is given', () => {
     fillTank(customer, 59);
     expect(customer.vehicle.fuelRemains).toBe(40);
     expect(customer.money).toBe(1112);
   });
 
-  it('should pour only what will fit if the amount is'
-    + 'greater than the tank can accommodate', () => {
+  it('should pours only what fits if amount exceeds tank capacity', () => {
     fillTank(customer, 59, 50);
     expect(customer.vehicle.fuelRemains).toBe(40);
     expect(customer.money).toBe(1112);
   });
 
-  it('should fill only what the client can afford', () => {
+  it('should fill in only what the client can pay for', () => {
     fillTank(customer, 59, 10);
     expect(customer.vehicle.fuelRemains).toBe(18);
     expect(customer.money).toBe(2410);
@@ -41,14 +39,14 @@ describe('fillTank', () => {
     expect(customer.money).toBe(2339.2);
   });
 
-  it('should not pour if the rounded amount is less than 2 liters', () => {
+  it('should does not pour if the rounded amount is less than 2 liters', () => {
     fillTank(customer, 59, 1.5);
     expect(customer.vehicle.fuelRemains).toBe(8);
     expect(customer.money).toBe(3000);
   });
 
   it('should round the price of the purchased fuel'
-    + 'to the nearest hundredth part', () => {
+    + 'to the nearest hundredths', () => {
     fillTank(customer, 51.234, 10.5);
     expect(customer.vehicle.fuelRemains).toBe(18.5);
     expect(customer.money).toBe(2462.04);
